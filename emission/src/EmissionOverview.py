@@ -46,7 +46,7 @@ class TorrentLocationBox(LocationBox):
 		self.skinName = ["TorrentLocationBox", "LocationBox"]
 
 		# non-standard filelist which shows .tor(rent) files
-		self["filelist"] = FileList(None, showDirectories=True, showFiles=True, matchingPattern="^.*\.tor(rent)?")
+		self["filelist"] = FileList(None, showDirectories=True, showFiles=True, matchingPattern=r"^.*\.tor(rent)?")
 
 	def ok(self):
 		# changeDir in booklist and only select path
@@ -65,7 +65,7 @@ class TorrentLocationBox(LocationBox):
 			cur = self["filelist"].getSelection()
 			ret = dir and cur and dir + cur[0]
 			if self.realBookmarks:
-				if self.autoAdd and not ret in self.bookmarks:
+				if self.autoAdd and ret not in self.bookmarks:
 					self.bookmarks.append(self.getPreferredFolder())
 					self.bookmarks.sort()
 
@@ -106,9 +106,9 @@ class EmissionOverview(Screen, HelpableScreen):
 						MultiContentEntryText(pos=(2,26), size=(555,18), text = 2, font = 1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER),
 						MultiContentEntryProgress(pos = (0, 44), size = (737, 6), percent = -3), # progress
 					],
-				  "fonts": [gFont("Regular", 20),gFont("Regular", 16)],
-				  "itemHeight": 51
-				 }
+					"fonts": [gFont("Regular", 20),gFont("Regular", 16)],
+					"itemHeight": 51
+				}
 			</convert>
 		</widget>
 		<widget source="upspeed" render="Label" size="150,20" position="5,300" halign="left" font="Regular;18" />

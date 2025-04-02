@@ -276,7 +276,7 @@ class AutomaticCleanup:
 		if int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1:  # check only if feature is enabled
 			print(pluginPrintname, "Cleaning up setting backups")
 			self.backupPath = self.getBackupPath()
-			if (path.exists(self.backupPath) == False):
+			if (path.exists(self.backupPath) is False):
 				print(pluginPrintname, "No backup directory available!")
 				return
 			self.settingList = glob(self.backupPath + '/*-enigma2settingsbackup.tar.gz')
@@ -478,9 +478,9 @@ class AutomaticCleanup:
 
 	def cleanupEnabled(self):
 		if int(config.plugins.AutomaticCleanup.deleteTimersOlderThan.value) > -1 or \
-		   int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or \
-		   int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1 or \
-		   config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.value:
+			int(config.plugins.AutomaticCleanup.keepSettings.value) > -1 or \
+			int(config.plugins.AutomaticCleanup.deleteSettingsOlderThan.value) > -1 or \
+			config.plugins.AutomaticCleanup.deleteOrphanedMovieFiles.value:
 			return True
 		else:
 			return False

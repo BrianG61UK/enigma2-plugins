@@ -57,7 +57,7 @@ instance = None
 
 CompiledRegexpNonDecimal = re.compile(r'[^\d]')
 CompiledRegexpReplaceChars = None
-CompiledRegexpReplaceDirChars = re.compile('[^/\wäöüß\-_\. ]')
+CompiledRegexpReplaceDirChars = re.compile(r'[^/\wäöüß\-_\. ]')
 
 
 def dump(obj):
@@ -110,7 +110,7 @@ def getInstance():
 				CompiledRegexpReplaceChars = re.compile('[' + config.plugins.seriesplugin.replace_chars.value.replace("\\", "\\\\\\\\") + ']')
 		except:
 			log.exception(" Config option 'Replace Chars' is no valid regular expression")
-			CompiledRegexpReplaceChars = re.compile("[:\!/\\,\(\)'\?]")
+			CompiledRegexpReplaceChars = re.compile(r"[:\!/\\,\(\)'\?]")
 
 		# Check autotimer
 		try:
@@ -490,7 +490,7 @@ class SeriesPlugin(Modules, ChannelsBase):
 				serviceref = str(service)
 			serviceref = re.sub('::.*', ':', serviceref)
 
-			if block == False:
+			if block is False:
 
 				self.thread.add(ThreadItem(identifier, callback, name, begin, end, serviceref))
 
