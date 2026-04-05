@@ -12,7 +12,7 @@ from Tools.BoundFunction import boundFunction
 try:
 	from Components.SystemInfo import BoxInfo
 	IMAGEDISTRO = BoxInfo.getItem("distro")
-except:
+except ImportError:
 	from boxbranding import getImageDistro
 	IMAGEDISTRO = getImageDistro()
 
@@ -224,7 +224,7 @@ def main(session, **kwargs):
 			doneConfiguring,
 			EPGRefreshConfiguration
 		)
-	except:
+	except ImportError:
 		print("[EPGRefresh] Error while Opening EPGRefreshConfiguration")
 		print_exc(file=stdout)
 
@@ -313,7 +313,6 @@ def housekeepingExtensionsmenu(configentry, force=False):
 			PlugDescriptor = extSetupDescriptor
 		elif configentry == config.plugins.epgrefresh.show_run_in_extensionsmenu:
 			PlugDescriptor = extRunDescriptor
-		# if PlugDescriptor != None:
 		if PlugDescriptor is not None:
 			AdjustExtensionsmenu(configentry.value, PlugDescriptor)
 

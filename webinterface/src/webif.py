@@ -27,7 +27,7 @@ from time import time
 from .WebScreens import *
 #DO NOT REMOVE THIS IMPORT
 
-from .__init__ import decrypt_block
+
 from os import urandom
 
 import six
@@ -314,7 +314,7 @@ def appendListItem(item, filternum, append):
 			time = int(item)
 			t = localtime(time)
 			append("%04d-%02d-%02d" % (t.tm_year, t.tm_mon, t.tm_mday))
-		except:
+		except Exception:
 			append("---")
 	elif filternum == webifHandler.FILTER_TIME:
 		from time import localtime
@@ -323,14 +323,14 @@ def appendListItem(item, filternum, append):
 			time = int(item)
 			t = localtime(time)
 			append("%02d:%02d" % (t.tm_hour, t.tm_min))
-		except:
+		except Exception:
 			append("--:--")
 	elif filternum == webifHandler.FILTER_MINUTES:
 		time = 0
 		try:
 			time = int(item)
 			append("%d min" % (time / 60))
-		except:
+		except Exception:
 			append("-- min")
 	elif filternum == webifHandler.FILTER_URI_ATTRIB:
 		append(quote(item).replace("\"", "%22"))
@@ -630,17 +630,10 @@ def requestFinish(handler, request, requestAlreadyFinished=False):
 				request.finish()
 			else:
 				print("[requestFinish] request already finished!")
-		except:
+		except Exception:
 			pass
 
 	del handler
-
-
-def validate_certificate(cert, key):
-	buf = decrypt_block(cert[8:], key)
-	if buf is None:
-		return None
-	return buf[36:107] + cert[139:196]
 
 
 def get_random():
@@ -651,5 +644,5 @@ def get_random():
 		result = xor(random, x)
 
 		return result
-	except:
+	except Exception:
 		return None

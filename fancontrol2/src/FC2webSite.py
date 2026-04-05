@@ -350,9 +350,9 @@ def CreateDataHead():
 			f = open(config.plugins.FanControl.LogPath.value + "FC2data.csv", "w")
 			try:
 				f.write(HeadLine)
-			except:
+			except Exception:
 				f.close()
-		except IOError:
+		except OSError:
 			pass
 
 ##########################################################
